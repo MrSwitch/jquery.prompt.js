@@ -12,7 +12,7 @@
 </head>
 <body>
 	<h1>jquery.prompt.js - non-blocking popup!</h1>
-	<p>Replaces the script blocking native javascript alerts()'s including: <a href='#' onclick="alert('Urgh!');">alert()</a>, <a href='#' onclick="prompt('yuck!!');">prompt()</a> and <a href='#' onclick="confirm('Let my browser multitask');">confirm()</a></p>
+	<p>Replaces the script blocking native javascript alerts()'s. Like these culprits: Click <a href='#' onclick="alert('Urgh!');">alert()</a>, <a href='#' onclick="prompt('yuck!!');">prompt()</a> and <a href='#' onclick="confirm('Let my browser multitask');">confirm()</a> and watch this counter stall =&gt; <span id="counter"></span></p>
 	<h2>Get Started</h2>
 	<p>include this little beaut in your page (along with jquery)</p>
 <pre>
@@ -37,9 +37,18 @@ $('&lt;p&gt;Pick a color, e.g. red, green, blue&lt;/p&gt;').prompt(function(v){d
 </pre>
 	<p>The scope of the callback is within the DOM form (which belongs to the prompt window). This is so we can access any customised extras which were added to the popup</p>
 	<p><a href="javascript: void(0);" onclick="$('<p>Pick a color <select><option>red</option><option>green</option><option>blue</option></select></p>').confirm(function(b){if(b){document.body.style.backgroundColor = $('select',this).val();}})">Try demo</a></p>
-	<pre>
-$('&lt;p&gt;Pick a color &lt;select&gt;&lt;option&gt;red&lt;/option&gt;&lt;option&gt;green&lt;/option&gt;&lt;option&gt;blue&lt;/option&gt;&lt;/select&gt;&lt;/p&gt;').confirm(function(b){if(b){document.body.style.backgroundColor = $("select",this).val();}})
-	</pre>
+<pre>
+$('&lt;p&gt;Pick a color &lt;select&gt;&lt;option&gt;red&lt;/option&gt;&lt;option&gt;green&lt;/option&gt;&lt;option&gt;blue&lt;/option&gt;&lt;/select&gt;&lt;/p&gt;')
+.confirm(function(b){if(b){document.body.style.backgroundColor = $("select",this).val();}})
+</pre>
 
+
+	<script>
+		var i=0;
+		(function counter(){
+			$("#counter").html("seconds:" + i++).css("backgroundColor","#eee");
+			setTimeout(counter,1000);
+		})()
+	</script>
 </body>
 </html>

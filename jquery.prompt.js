@@ -6,14 +6,26 @@
  */
 ;(function($){
 
-	$.fn.popup = function(callback){
+	$.fn.popup = function(message, callback){
+	
+		if(typeof(message) === 'function'){
+			callback = message;
+			message = this;
+		}
+		
+		if(typeof(message) === 'string'){
+			// wrap message
+			message = $("<p>"+message+"</p>").get(0);
+		}
+		
+		message = message || this;
 		
 		// cancel if open already, return an empty jQuery object
 		if($('.jquery_prompt').length){return $();}
-		
+
 		// define callback
-		callback = callback || function(){};
-		
+		callback = callback || function(p){return !!p;};
+
 		// add `ESC` + `enter` listener
 		var bind = function(e){ 
 				if(e.which===27){ 
@@ -34,7 +46,7 @@
 					+'</form></div>')
 				.appendTo("body")
 				.find('form')
-				.prepend(this)
+				.prepend(message)
 				.submit(function(e){
 					// prevent submission
 					e.preventDefault();
@@ -59,16 +71,16 @@
 		return $popup;
 	}
 
-	$.fn.prompt = function(callback){
-		return $(this).popup(callback).find("input, button").show().end();		
+	$.fn.prompt = function(message,callback){
+		return $(this).popup(message,callback).find("input, button").show().end();		
 	}
 
-	$.fn.alert = function(callback){
-		return $(this).popup(callback);
+	$.fn.alert = function(message,callback){
+		return $(this).popup(message,callback);
 	}	
 
-	$.fn.confirm = function(callback){
-		return $(this).popup(callback).find("button").show().end();
+	$.fn.confirm = function(message,callback){
+		return $(this).popup(message,callback).find("button").show().end();
 	}	
 	
 })(jQuery);
