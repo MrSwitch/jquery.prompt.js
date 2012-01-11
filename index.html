@@ -1,0 +1,45 @@
+<!doctype html5>
+<html>
+<head>
+	<title>jquery.prompt.js</title>
+	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+	<script src="./jquery.prompt.js"></script>
+	<link rel="stylesheet" href="./jquery.prompt.css"/>
+	<style>
+		body{font-family:verdana;font-size:1.1em;}
+		pre{background-color:#eee;border:1px solid #ddd;border-left-width:10px;padding:20px;}
+	</style>
+</head>
+<body>
+	<h1>jquery.prompt.js - non-blocking popup!</h1>
+	<p>Replaces the script blocking native javascript alerts()'s including: <a href='#' onclick="alert('Urgh!');">alert()</a>, <a href='#' onclick="prompt('yuck!!');">prompt()</a> and <a href='#' onclick="confirm('Let my browser multitask');">confirm()</a></p>
+	<h2>Get Started</h2>
+	<p>include this little beaut in your page (along with jquery)</p>
+<pre>
+&lt;script src=&quot;./jquery.prompt.js&quot;&gt;&lt;/script&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;./jquery.prompt.css&quot;/&gt;
+</pre>
+	<p>And then create popups</p>
+	<pre>$('&lt;p&gt;Nice isn't it!&lt;/p&gt;').confirm()</pre>
+	<p>Demo: <a href="javascript:void(0);" onclick="$('<p>Nice isn\'t it!</p>').confirm()">$.fn.confirm()</a></p>
+	<h2>Methods</h2>
+	<p>This adds the following methods to jQuery</p>
+	<dl>
+		<dt><a href="javascript:void(0);" onclick="$('<p>Confirm demo</p>').confirm()">$.fn.confirm(<em>[function callback]</em>)</a></dt><dd>Prompt with 'cancel' and 'ok' buttons</dd>
+		<dt><a href="javascript:void(0);" onclick="$('<p>Alert demo</p>').alert()">$.fn.alert(<em>[function callback]</em>)</a></dt><dd>Prompt with 'ok' button</dd>
+		<dt><a href="javascript:void(0);" onclick="$('<p>Prompt demo</p>').prompt()">$.fn.prompt(<em>[function callback]</em>)</a></dt><dd>Prompt with 'cancel' and 'ok' buttons and input field</dd>
+	</dl>
+	<h2>Function Callback</h2>
+	<p>The first parameter returns either, bool ('ok' = true, 'cancel' = false) or if a text value is given by the user in the prompt this value is returned.<p>
+	<p><a href="javascript:void(0);" onclick="$('&lt;p&gt;Pick a color, e.g. red, green, blue&lt;/p&gt;').prompt(function(v){document.body.style.backgroundColor = v;})">Try demo</a></p>
+<pre>
+$('&lt;p&gt;Pick a color, e.g. red, green, blue&lt;/p&gt;').prompt(function(v){document.body.style.backgroundColor = v;})
+</pre>
+	<p>The scope of the callback is within the DOM form (which belongs to the prompt window). This is so we can access any customised extras which were added to the popup</p>
+	<p><a href="javascript: void(0);" onclick="$('<p>Pick a color <select><option>red</option><option>green</option><option>blue</option></select></p>').confirm(function(b){if(b){document.body.style.backgroundColor = $('select',this).val();}})">Try demo</a></p>
+	<pre>
+$('&lt;p&gt;Pick a color &lt;select&gt;&lt;option&gt;red&lt;/option&gt;&lt;option&gt;green&lt;/option&gt;&lt;option&gt;blue&lt;/option&gt;&lt;/select&gt;&lt;/p&gt;').confirm(function(b){if(b){document.body.style.backgroundColor = $("select",this).val();}})
+	</pre>
+
+</body>
+</html>
