@@ -43,10 +43,10 @@
 		// add `ESC` + `enter` listener
 		var bind = function(e){ 
 				if(e.which===27){ 
-					$popup.find('button[value=cancel]').trigger('click');
+					$popup.find('form').trigger('reset');
 				} 
 				else if (e.which === 13){
-					$popup.find(':submit').trigger('click');
+					$popup.find('form').trigger('submit');
 				} 
 			};
 
@@ -54,9 +54,8 @@
 		
 		// build popup
 		var $popup = $('<div class="jquery_prompt"><form><input type="text" name="text" value="" style="display:none;"/>'
-						+'<input type="hidden" name="confirm" value="1">'
-						+'<button type="button" value="cancel" style="display:none;">Cancel</button>'
-						+'<button type="submit">Ok</button>'
+						+'<button type="reset" style="display:none;">Cancel</button>'
+						+'<button type="submit" name="submit" value="1">Ok</button>'
 						+'<br/><input name="bugme" id="bugme" type="checkbox" value="1" checked="checked" style="display:none;">'
 						+'<label for="bugme" style="display:none;">keep asking me</label>'
 					+'</form></div>')
@@ -67,9 +66,9 @@
 					// prevent submission
 					e.preventDefault();
 					// remove event listeners
-					$(document).unbind('keydown', bind);
+					$(document).unbind('keydown', bind);					
 					// trigger callback
-					callback.call(this, $('input[name=confirm]',this).val() == 1 ? $('input[name=text]:visible',this).val() || true : false );
+					callback.call(this, $('button[name=submit]',this).val() == 1 ? $('input[name=text]:visible',this).val() || true : false );
 					// prevent the system from popping these messages again
 					if(!$('input[name=bugme]',this).is(':checked')){
 						ignorelist.push(hash);
@@ -78,12 +77,10 @@
 					// kill this popup
 					$(this).parent().remove();
 				})
-				.find('button[value=cancel]')
-				.click(function(){
-					$('input[name=confirm]', this.form).val(0);
-					$(this.form).submit();
+				.bind('reset', function(){
+					$('button[name=submit]', this).val(0);
+					$(this).submit();
 				})
-				.end()
 				.find('button[type=submit]')
 				.trigger('focus')
 				.end()
@@ -98,7 +95,7 @@
 	}
 
 	$.fn.prompt = function(message,callback,bugme){
-		return $(this).popup(message,callback,bugme).find("input, button").show().end();		
+		return $(this).popup(message,callback,bugme).find("input[name=text], button").show().end();		
 	}
 
 	$.fn.alert = function(message,callback,bugme){
