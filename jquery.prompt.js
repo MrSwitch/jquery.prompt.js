@@ -6,11 +6,18 @@
  */
 ;(function($){
 
-	$.fn.popup = function(message, callback){
+	var ignorelist = [];
+	try{ignorelist = JSON.parse(localStorage.getItem('prompt.bugme')) || [];}catch(e){}
+
+	$.fn.popup = function(message, callback, bugme ){
 	
+		if(typeof(callback) === 'boolean'){
+			bugme = callback;
+		}
+		
 		if(typeof(message) === 'function'){
 			callback = message;
-			message = this;
+			message = null;
 		}
 		
 		if(typeof(message) === 'string'){
@@ -25,6 +32,13 @@
 
 		// define callback
 		callback = callback || function(p){return !!p;};
+		
+		// in the ignore list?
+		var hash = $(message).text();
+		if(bugme && ignorelist.indexOf(hash)>-1){
+			callback(bugme);
+			return $();
+		}
 
 		// add `ESC` + `enter` listener
 		var bind = function(e){ 
@@ -43,6 +57,8 @@
 						+'<input type="hidden" name="confirm" value="1">'
 						+'<button type="button" value="cancel" style="display:none;">Cancel</button>'
 						+'<button type="submit">Ok</button>'
+						+'<br/><input name="bugme" id="bugme" type="checkbox" value="1" checked="checked" style="display:none;">'
+						+'<label for="bugme" style="display:none;">keep asking me</label>'
 					+'</form></div>')
 				.appendTo("body")
 				.find('form')
@@ -54,6 +70,11 @@
 					$(document).unbind('keydown', bind);
 					// trigger callback
 					callback.call(this, $('input[name=confirm]',this).val() == 1 ? $('input[name=text]:visible',this).val() || true : false );
+					// prevent the system from popping these messages again
+					if(!$('input[name=bugme]',this).is(':checked')){
+						ignorelist.push(hash);
+						try{localStorage.setItem('prompt.bugme',JSON.stringify(ignorelist));}catch(e){}
+					}
 					// kill this popup
 					$(this).parent().remove();
 				})
@@ -67,20 +88,25 @@
 				.trigger('focus')
 				.end()
 				.end();
+		
+		// Let the user cancel these messages
+		if(bugme){
+			$popup.find('input[name=bugme], input[name=bugme] + label').show();
+		}
 
 		return $popup;
 	}
 
-	$.fn.prompt = function(message,callback){
-		return $(this).popup(message,callback).find("input, button").show().end();		
+	$.fn.prompt = function(message,callback,bugme){
+		return $(this).popup(message,callback,bugme).find("input, button").show().end();		
 	}
 
-	$.fn.alert = function(message,callback){
-		return $(this).popup(message,callback);
+	$.fn.alert = function(message,callback,bugme){
+		return $(this).popup(message,callback,bugme);
 	}	
 
-	$.fn.confirm = function(message,callback){
-		return $(this).popup(message,callback).find("button").show().end();
+	$.fn.confirm = function(message,callback,bugme){
+		return $(this).popup(message,callback,bugme).find("button").show().end();
 	}	
 	
 })(jQuery);

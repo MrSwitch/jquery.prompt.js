@@ -42,6 +42,9 @@ $('&lt;p&gt;Pick a color &lt;select&gt;&lt;option&gt;red&lt;/option&gt;&lt;optio
 .confirm(function(b){if(b){document.body.style.backgroundColor = $("select",this).val();}})
 </pre>
 
+<h2>Dont remind me again</h2>
+<p>Passing in a boolean value as the second parameter indicates the default value, and an additional "Do not bug me again message". $.fn.prompt(function, true). </p>
+	<p><a href="javascript: void(0);" onclick="var a = [], i=3; while(i--){a.push(parseInt(Math.random()*125)+125);} $('<p>Realy want to change...  i\'m going to bug you until you tick the box</p>').confirm(function(b){if(b){document.body.style.backgroundColor='rgb('+a.join(',')+')';}},true)">Try demo</a></p>
 
 	<script>
 		var i=0;

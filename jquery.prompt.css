@@ -49,6 +49,12 @@
 			font-weight:bold;
 		}
 
+		.jquery_prompt input[type=checkbox],.jquery_prompt input[type=checkbox] + label{
+			width:auto;
+			font-size:12px;
+		}
+
+
 /**
  * Add Gradients
  */
