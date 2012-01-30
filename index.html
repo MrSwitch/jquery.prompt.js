@@ -6,7 +6,7 @@
 	<script src="./jquery.prompt.js"></script>
 	<link rel="stylesheet" href="./jquery.prompt.css"/>
 	<style>
-		html{background-color:gray;box-shadow:0 -150px 150px -150px black inset, 0 250px 250px -250px white inset;}
+		html{background-color:gray;box-shadow:0 -150px 150px -150px rgba(0,0,0,0.5) inset, 0 250px 250px -250px rgba(255,255,255,0.5) inset;}
 		body{background-color:white;font-family:verdana;font-size:1.1em;margin:10px auto;max-width:1000px;box-shadow:0 0 10px black;padding:50px;}
 		pre{background-color:#eee;border:1px solid #ddd;border-left-width:10px;padding:20px;}
 	</style>
@@ -46,6 +46,7 @@ $('&lt;p&gt;Pick a color &lt;select&gt;&lt;option&gt;red&lt;/option&gt;&lt;optio
 <h2>Dont remind me again</h2>
 <p>Passing in a boolean value as the second parameter indicates the default value, and an additional "Do not bug me again message". $.fn.prompt(function, true). </p>
 	<p><a href="javascript: void(0);" onclick="var a = [], i=3; while(i--){a.push(parseInt(Math.random()*125)+125);} $('<p>Realy want to change...  i\'m going to bug you until you tick the box</p>').confirm(function(b){if(b){document.body.style.backgroundColor='rgb('+a.join(',')+')';}},true)">Try demo</a></p>
+	<p><a href="javascript: void(0);" onclick="localStorage.removeItem('prompt.bugme');">refresh</a></p>
 
 	<script>
 		var i=0;
