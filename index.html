@@ -3,17 +3,20 @@
 <head>
 	<title>jquery.prompt.js</title>
 	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+
+	<!-- jquery prompt -->
 	<script src="./jquery.prompt.js"></script>
 	<link rel="stylesheet" href="./jquery.prompt.css"/>
-	<style>
-		html{background-color:gray;box-shadow:0 -150px 150px -150px rgba(0,0,0,0.5) inset, 0 250px 250px -250px rgba(255,255,255,0.5) inset;}
-		body{background-color:white;font-family:verdana;font-size:1.1em;margin:10px auto;max-width:1000px;box-shadow:0 0 10px black;padding:50px;}
-		pre{background-color:#eee;border:1px solid #ddd;border-left-width:10px;padding:20px;}
-	</style>
+
+	<!-- page style -->
+	<link rel="stylesheet" href="../_packages/document.css"/>
+	<script src="../_packages/document.js"></script>
 </head>
 <body>
 	<h1>jquery.prompt.js - non-blocking popup!</h1>
 	<p>Replaces the script blocking native javascript alerts()'s. Like these culprits: Click <a href='#' onclick="alert('Urgh!');">alert()</a>, <a href='#' onclick="prompt('yuck!!');">prompt()</a> and <a href='#' onclick="confirm('Let my browser multitask');">confirm()</a> and watch this counter stall =&gt; <span id="counter"></span></p>
+	<nav class="toc"></nav>
+
 	<h2>Get Started</h2>
 	<p>include this little beaut in your page (along with jquery)</p>
 <pre>

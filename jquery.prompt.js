@@ -1,10 +1,10 @@
-/**
- * Prompt, 
- * A Non-blocking popup!
- * @author Andrew Dodson
- * @since Jan 2012
- */
-;(function($){
+//
+// Prompt
+// A Non-blocking popup!
+// @author Andrew Dodson
+// @since Jan 2012
+//
+(function($){
 
 	var ignorelist = [];
 	try{ignorelist = JSON.parse(localStorage.getItem('prompt.bugme')) || [];}catch(e){}
@@ -41,13 +41,13 @@
 		}
 
 		// add `ESC` + `enter` listener
-		var bind = function(e){ 
-				if(e.which===27){ 
+		var bind = function(e){
+				if(e.which===27){
 					$popup.find('form').trigger('reset');
-				} 
+				}
 				else if (e.which === 13){
 					$popup.find('form').trigger('submit');
-				} 
+				}
 			};
 
 		$(document).bind('keydown', bind );
@@ -66,7 +66,7 @@
 					// prevent submission
 					e.preventDefault();
 					// remove event listeners
-					$(document).unbind('keydown', bind);					
+					$(document).unbind('keydown', bind);
 					// trigger callback
 					callback.call(this, $('button[name=submit]',this).val() == 1 ? $('input[name=text]:visible',this).val() || true : false );
 					// prevent the system from popping these messages again
@@ -92,18 +92,18 @@
 		}
 
 		return $popup;
-	}
+	};
 
 	$.fn.prompt = function(message,callback,bugme){
-		return $(this).popup(message,callback,bugme).find("input[name=text], button").show().end();		
-	}
+		return $(this).popup(message,callback,bugme).find("input[name=text], button").show().end();
+	};
 
 	$.fn.alert = function(message,callback,bugme){
 		return $(this).popup(message,callback,bugme);
-	}	
+	};
 
 	$.fn.confirm = function(message,callback,bugme){
 		return $(this).popup(message,callback,bugme).find("button").show().end();
-	}	
+	};
 	
 })(jQuery);
