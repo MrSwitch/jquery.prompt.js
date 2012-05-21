@@ -13,6 +13,7 @@
 	color:#444;
 	font-family:arial;
 	font-weight:bold;
+	z-index:10000;
 }
 	.jquery_prompt form{
 		text-align:center;
