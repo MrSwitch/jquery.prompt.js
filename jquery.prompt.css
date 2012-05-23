@@ -14,6 +14,16 @@
 	font-family:arial;
 	font-weight:bold;
 	z-index:10000;
+	
+	/* display content vertically, with flex box */
+	display: -webkit-box; 
+	-webkit-box-align: center;
+	display: -moz-box; 
+	-moz-box-align: center;
+	display: -ms-box; 
+	-ms-box-align: center;
+	display: box; 
+	box-align: center;
 }
 	.jquery_prompt form{
 		text-align:center;
@@ -22,7 +32,7 @@
 		border-radius: 5px;
 		box-shadow:0 20px 60px black;
 		box-shadow:0 20px 60px rgba(0,0,0,0.8);
-		margin:10% auto;
+		margin:5% auto;
 		padding:10px 20px;
 		font-size:1.5em;
 		line-height:1.2em;

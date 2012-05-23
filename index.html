@@ -9,10 +9,16 @@
 		body{font-family:verdana;font-size:1.1em;}
 		pre{background-color:#eee;border:1px solid #ddd;border-left-width:10px;padding:20px;}
 	</style>
+
+	<!-- page style -->
+	<link rel="stylesheet" href="../_packages/document.css"/>
+	<script src="../_packages/document.js"></script>
 </head>
 <body>
 	<h1>jquery.prompt.js - non-blocking popup!</h1>
 	<p>Replaces the script blocking native javascript alerts()'s. Like these culprits: Click <a href='#' onclick="alert('Urgh!');">alert()</a>, <a href='#' onclick="prompt('yuck!!');">prompt()</a> and <a href='#' onclick="confirm('Let my browser multitask');">confirm()</a> and watch this counter stall =&gt; <span id="counter"></span></p>
+	<nav class="toc"></nav>
+
 	<h2>Get Started</h2>
 	<p>include this little beaut in your page (along with jquery)</p>
 <pre>
@@ -45,6 +51,7 @@ $('&lt;p&gt;Pick a color &lt;select&gt;&lt;option&gt;red&lt;/option&gt;&lt;optio
 <h2>Dont remind me again</h2>
 <p>Passing in a boolean value as the second parameter indicates the default value, and an additional "Do not bug me again message". $.fn.prompt(function, true). </p>
 	<p><a href="javascript: void(0);" onclick="var a = [], i=3; while(i--){a.push(parseInt(Math.random()*125)+125);} $('<p>Realy want to change...  i\'m going to bug you until you tick the box</p>').confirm(function(b){if(b){document.body.style.backgroundColor='rgb('+a.join(',')+')';}},true)">Try demo</a></p>
+	<p><a href="javascript: void(0);" onclick="localStorage.removeItem('prompt.bugme');">refresh</a></p>
 
 	<script>
 		var i=0;
