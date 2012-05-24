@@ -18,6 +18,7 @@
 	font-family:arial;
 	font-weight:bold;
 	z-index:10000;
+	border:none;
 
 	
 	/* display content vertically, with flex box */
