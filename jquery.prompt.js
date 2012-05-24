@@ -53,7 +53,7 @@
 		$(document).bind('keydown', bind );
 		
 		// build popup
-		var $popup = $('<div class="jquery_prompt"><form><input type="text" name="text" value="" style="display:none;"/>'
+		var $popup = $('<iframe class="jquery_prompt"></iframe><div class="jquery_prompt plugin"><form><input type="text" name="text" value="" style="display:none;"/>'
 						+'<button type="reset" style="display:none;">Cancel</button>'
 						+'<button type="submit" name="submit" value="1">Ok</button>'
 						+'<br/><input name="bugme" id="bugme" type="checkbox" value="1" checked="checked" style="display:none;">'
@@ -75,7 +75,7 @@
 						try{localStorage.setItem('prompt.bugme',JSON.stringify(ignorelist));}catch(e){}
 					}
 					// kill this popup
-					$(this).parent().remove();
+					$(this).parent().add($(this).parent().siblings('.jquery_prompt')).remove();
 				})
 				.bind('reset', function(){
 					$('button[name=submit]', this).val(0);

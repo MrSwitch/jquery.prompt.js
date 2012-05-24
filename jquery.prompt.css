@@ -9,11 +9,16 @@
 	left:0; 
 	right: 0;
 	bottom:0;
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
 	background-color:rgba(0,0,0,0.2);
 	color:#444;
 	font-family:arial;
 	font-weight:bold;
 	z-index:10000;
+
 	
 	/* display content vertically, with flex box */
 	display: -webkit-box; 
@@ -26,23 +31,29 @@
 	box-align: center;
 }
 	.jquery_prompt form{
+		margin:5% auto;
+		display:table;
+		box-sizing:border-box;
+		-moz-box-sizing:border-box;
+	}
+
+	.plugin form{
 		text-align:center;
 		background-color:white;
-		width: 300px;
+		max-width: 100%;
 		border-radius: 5px;
 		box-shadow:0 20px 60px black;
 		box-shadow:0 20px 60px rgba(0,0,0,0.8);
-		margin:5% auto;
 		padding:10px 20px;
 		font-size:1.5em;
 		line-height:1.2em;
 	}
-		.jquery_prompt input{
+		.plugin input{
 			width:100%;
 			font-size:inherit;
 			margin-top:20px;
 		}
-		.jquery_prompt button{
+		.plugin button{
 			color:white;
 			margin-top:20px;
 			font-weight:normal;
@@ -50,17 +61,17 @@
 			font-size:inherit;
 			border-radius:5px;
 		}
-		.jquery_prompt button[type=button]{
+		.plugin button[type=button]{
 			font-size:0.7em;
 			padding:9px 10px;
 		}
 		
-		.jquery_prompt button[type=submit]{
+		.plugin button[type=submit]{
 			background-color:lime;
 			font-weight:bold;
 		}
 
-		.jquery_prompt input[type=checkbox],.jquery_prompt input[type=checkbox] + label{
+		.plugin input[type=checkbox],.plugin input[type=checkbox] + label{
 			width:auto;
 			font-size:12px;
 		}
@@ -69,8 +80,8 @@
 /**
  * Add Gradients
  */
-	.jquery_prompt form, 
-	.jquery_prompt button{
+	.plugin form, 
+	.plugin button{
 		/* IE<=9 */
 		filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#00000000', endColorstr='#99000000');
 		/* Safari 4-5, Chrome 1-9 */
@@ -86,7 +97,7 @@
 		/* future */
 		background-image: linear-gradient(top, transparent, rgba(0,0,0,0.6));	
 	}	
-	.jquery_prompt button{
+	.plugin button{
 		color:white;
 		border:1px solid #777;
 		background-color:#bbb;
