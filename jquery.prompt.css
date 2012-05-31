@@ -52,6 +52,7 @@
 		box-shadow:0 20px 60px rgba(0,0,0,0.8);
 		padding:0;
 		font-size:1.5em;
+		position: relative;
 		line-height:1.2em;
 	}
 	.plugin form > *{
@@ -63,6 +64,7 @@
 	}
 	.plugin form > footer{
 		padding-bottom:20px;
+		position: relative;
 	}
 
 		.plugin input{
