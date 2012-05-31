@@ -7,7 +7,7 @@
 	<link rel="stylesheet" href="jquery.prompt.css"/>
 	<style>
 		body{font-family:verdana;font-size:1.1em;}
-		pre{background-color:#eee;border:1px solid #ddd;border-left-width:10px;padding:20px;}
+		pre, .pre{background-color:#eee;border:1px solid #ddd;border-left-width:10px;padding:20px;}
 	</style>
 
 	<!-- page style -->
@@ -37,16 +37,19 @@
 	</dl>
 	<h2>Function Callback</h2>
 	<p>The first parameter returns either, bool ('ok' = true, 'cancel' = false) or if a text value is given by the user in the prompt this value is returned.<p>
-	<p><a href="javascript:void(0);" onclick="$('&lt;p&gt;Pick a color, e.g. red, green, blue&lt;/p&gt;').prompt(function(v){document.body.style.backgroundColor = v;})">Try demo</a></p>
-<pre>
-$('&lt;p&gt;Pick a color, e.g. red, green, blue&lt;/p&gt;').prompt(function(v){document.body.style.backgroundColor = v;})
-</pre>
+	<p><a href="javascript:void(0);" onclick="pickcolor()">Try demo</a></p>
+<script class="pre">function pickcolor(){
+	$('<p>Pick a color, e.g. red, green, blue</p>').prompt(function(v){document.body.style.backgroundColor = v;})	
+}</script>
 	<p>The scope of the callback is within the DOM form (which belongs to the prompt window). This is so we can access any customised extras which were added to the popup</p>
-	<p><a href="javascript: void(0);" onclick="$('<p>Pick a color <select><option>red</option><option>green</option><option>blue</option></select></p>').confirm(function(b){if(b){document.body.style.backgroundColor = $('select',this).val();}})">Try demo</a></p>
-<pre>
-$('&lt;p&gt;Pick a color &lt;select&gt;&lt;option&gt;red&lt;/option&gt;&lt;option&gt;green&lt;/option&gt;&lt;option&gt;blue&lt;/option&gt;&lt;/select&gt;&lt;/p&gt;')
-.confirm(function(b){if(b){document.body.style.backgroundColor = $("select",this).val();}})
-</pre>
+	<p><a href="javascript: void(0);" onclick="selectColor()">Try demo</a></p>
+<script class="pre">
+function selectColor(){
+	$('<p>Pick a color <select><option>red</option><option>green</option><option>blue</option></select></p>').confirm(function(b){
+		if(b){document.body.style.backgroundColor = $('select',this).val();}
+	});
+}
+</script>
 
 <h2>Dont remind me again</h2>
 <p>Passing in a boolean value as the second parameter indicates the default value, and an additional "Do not bug me again message". $.fn.prompt(function, true). </p>
@@ -60,5 +63,54 @@ $('&lt;p&gt;Pick a color &lt;select&gt;&lt;option&gt;red&lt;/option&gt;&lt;optio
 			setTimeout(counter,1000);
 		})()
 	</script>
+
+<h2>Styling</h2>
+	<p>Demo: <a href="javascript:void(0);" onclick="customSmart()">Try it</a></p>
+	<script class="pre" title="Script">function customSmart(){
+	$('<h2 class="gradient">Style Demo</h2><p>With custom styles we can customise individual or a group of dialog boxes. e.g. add a styled h1 tag. Set a max-width on the content tags to stop it from stretching &amp; colour the button below red in order to bring attention to it, even change the button text... </p>').alert().addClass('smart')
+}</script>
+	<style class="pre" title="Style">
+.smart form{
+	background-color:#444;
+}
+.smart h2{
+	color:white;
+	background-color:#eee;
+	padding:10px 20px;
+	line-height:auto;
+	font-size:2em;
+	margin:0;
+	font-size:1em;
+	color:#444;
+	border-bottom:2px solid rgba(0,0,0,0.8);
+}
+	.smart p {
+		margin:10px 0;
+		font-size:0.8em;
+		font-weight:normal;
+		color:#bbb;
+		max-width:380px;
+		text-align:left;
+		line-height:1.2em;
+	}
+	.smart footer button[type=submit]{
+		width:100%;
+		background-color:#900;
+		color:transparent;
+		position: relative;
+		border:none;
+		box-shadow:0 -5px 5px rgba(0, 0, 0, 0.2) inset;
+	}
+	.smart footer button[type=submit]:after{
+		content:'Ok, i get it';
+		color:white;
+		position:absolute;
+		width:100%;
+		left:0;
+	}
+	.smart footer button:focus{
+		outline: none;
+	}
+	</style>
 </body>
 </html>

@@ -53,11 +53,14 @@
 		$(document).bind('keydown', bind );
 		
 		// build popup
-		var $popup = $('<iframe class="jquery_prompt"></iframe><div class="jquery_prompt plugin"><form><input type="text" name="text" value="" style="display:none;"/>'
+		var $popup = $('<iframe class="jquery_prompt"></iframe><div class="jquery_prompt plugin"><form>'
+						+'<footer>'
+						+'<input type="text" name="text" value="" style="display:none;"/>'
 						+'<button type="reset" style="display:none;">Cancel</button>'
 						+'<button type="submit" name="submit" value="1">Ok</button>'
 						+'<br/><input name="bugme" id="bugme" type="checkbox" value="1" checked="checked" style="display:none;">'
 						+'<label for="bugme" style="display:none;">keep asking me</label>'
+						+'</footer>'
 					+'</form></div>')
 				.prependTo("body")
 				.find('form')

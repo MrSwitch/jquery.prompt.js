@@ -50,10 +50,21 @@
 		border-radius: 5px;
 		box-shadow:0 20px 60px black;
 		box-shadow:0 20px 60px rgba(0,0,0,0.8);
-		padding:10px 20px;
+		padding:0;
 		font-size:1.5em;
 		line-height:1.2em;
 	}
+	.plugin form > *{
+		padding-left:20px;
+		padding-right:20px;
+	}
+	.plugin form > :first-child{
+		padding-top:20px;
+	}
+	.plugin form > footer{
+		padding-bottom:20px;
+	}
+
 		.plugin input{
 			width:100%;
 			font-size:inherit;
@@ -87,7 +98,8 @@
  * Add Gradients
  */
 	.plugin form, 
-	.plugin button{
+	.plugin button,
+	.plugin .gradient{
 		/* IE<=9 */
 		filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0,startColorstr='#00000000', endColorstr='#99000000');
 		/* Safari 4-5, Chrome 1-9 */
