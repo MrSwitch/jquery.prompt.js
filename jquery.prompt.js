@@ -59,7 +59,7 @@
 						+'<br/><input name="bugme" id="bugme" type="checkbox" value="1" checked="checked" style="display:none;">'
 						+'<label for="bugme" style="display:none;">keep asking me</label>'
 					+'</form></div>')
-				.appendTo("body")
+				.prependTo("body")
 				.find('form')
 				.prepend(message)
 				.submit(function(e){
