@@ -4,13 +4,15 @@
 // @author Andrew Dodson
 // @since Jan 2012
 //
-(function($){
+;(function($){
 
 	var ignorelist = [];
 	try{ignorelist = JSON.parse(localStorage.getItem('prompt.bugme')) || [];}catch(e){}
 
 	$.fn.popup = function(message, callback, bugme ){
-	
+		
+		var defaultValue='';
+
 		if(typeof(callback) === 'boolean'){
 			bugme = callback;
 		}
@@ -21,9 +23,17 @@
 		}
 		
 		if(typeof(message) === 'string'){
+
 			// wrap message
-			message = $("<p>"+message+"</p>").get(0);
+			if(this.length === 0){
+				message = $("<p>"+message+"</p>").get(0);
+			}
+			else {
+				defaultValue = message;
+				message = null;
+			}
 		}
+
 		
 		message = message || this;
 		
@@ -66,25 +76,46 @@
 				.find('form')
 				.prepend(message)
 				.submit(function(e){
-					// prevent submission
-					e.preventDefault();
-					// remove event listeners
-					$(document).unbind('keydown', bind);
+					
 					// trigger callback
-					callback.call(this, $('button[name=submit]',this).val() == 1 ? $('input[name=text]:visible',this).val() || true : false );
-					// prevent the system from popping these messages again
-					if(!$('input[name=bugme]',this).is(':checked')){
-						ignorelist.push(hash);
-						try{localStorage.setItem('prompt.bugme',JSON.stringify(ignorelist));}catch(e){}
+					e.response = $('button[name=submit]',this).val() == 1 ? $('input[name=text]:visible',this).val() || true : false;
+
+					try{
+						callback.call(this, e);
 					}
-					// kill this popup
-					$(this).parent().add($(this).parent().siblings('.jquery_prompt')).remove();
+					catch(e){
+						e.preventDefault();
+						throw e;
+					}
+
+					if(!e.isDefaultPrevented()){
+						// remove event listeners
+						$(document).unbind('keydown', bind);
+
+						// dont submit the form.
+						e.preventDefault();
+						// prevent the system from popping these messages again
+						if(!$('input[name=bugme]',this).is(':checked')){
+							ignorelist.push(hash);
+							try{localStorage.setItem('prompt.bugme',JSON.stringify(ignorelist));}catch(e){}
+						}
+						// kill this popup
+						$(this).parent().add($(this).parent().siblings('.jquery_prompt')).remove();
+					}
+					else{
+						// reinstate the submit button if it was reset
+						$('button[name=submit]', this).val('1');
+					}
 				})
 				.bind('reset', function(){
 					$('button[name=submit]', this).val(0);
 					$(this).submit();
 				})
 				.find('button[type=submit]')
+				.trigger('focus')
+				.end()
+				.find('input[type=text]')
+				.val(defaultValue)
 				.trigger('focus')
 				.end()
 				.end();

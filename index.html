@@ -10,6 +10,14 @@
 		pre, .pre{background-color:#eee;border:1px solid #ddd;border-left-width:10px;padding:20px;}
 	</style>
 
+	<script>
+		var i=0;
+		(function counter(){
+			$("#counter").html("seconds:" + i++).css("backgroundColor","#eee");
+			setTimeout(counter,1000);
+		})()
+	</script>
+
 	<!-- page style -->
 	<link rel="stylesheet" href="../_packages/document.css"/>
 	<script src="../_packages/document.js"></script>
@@ -39,30 +47,59 @@
 	<p>The first parameter returns either, bool ('ok' = true, 'cancel' = false) or if a text value is given by the user in the prompt this value is returned.<p>
 	<p><a href="javascript:void(0);" onclick="pickcolor()">Try demo</a></p>
 <script class="pre">function pickcolor(){
-	$('<p>Pick a color, e.g. red, green, blue</p>').prompt(function(v){document.body.style.backgroundColor = v;})	
+	$('<p>Pick a color, e.g. red, green, blue</p>').prompt(function(e){document.body.style.backgroundColor = e.response;})	
 }</script>
 	<p>The scope of the callback is within the DOM form (which belongs to the prompt window). This is so we can access any customised extras which were added to the popup</p>
 	<p><a href="javascript: void(0);" onclick="selectColor()">Try demo</a></p>
 <script class="pre">
 function selectColor(){
-	$('<p>Pick a color <select><option>red</option><option>green</option><option>blue</option></select></p>').confirm(function(b){
-		if(b){document.body.style.backgroundColor = $('select',this).val();}
+	$('<p>Pick a color <select><option>red</option><option>green</option><option>blue</option></select></p>').confirm(function(e){
+		if(e.response){document.body.style.backgroundColor = $('select',this).val();}
 	});
 }
 </script>
 
 <h2>Dont remind me again</h2>
 <p>Passing in a boolean value as the second parameter indicates the default value, and an additional "Do not bug me again message". $.fn.prompt(function, true). </p>
-	<p><a href="javascript: void(0);" onclick="var a = [], i=3; while(i--){a.push(parseInt(Math.random()*125)+125);} $('<p>Realy want to change...  i\'m going to bug you until you tick the box</p>').confirm(function(b){if(b){document.body.style.backgroundColor='rgb('+a.join(',')+')';}},true)">Try demo</a></p>
+<script class="pre">
+function doSomething(){
+	var a = [], 
+		i=3; 
+	while(i--){
+		a.push(parseInt(Math.random()*125)+125);
+	}
+	document.body.style.backgroundColor='rgb('+a.join(',')+')'	
+}
+
+function demoDontRemind(){
+	$('<p>Really want to change...  i\'m going to bug you until you tick the box</p>').confirm(function(e){
+		if(e.response){ 
+			doSomething(); 
+		}
+	},true);
+}
+</script>
+	<p><a href="javascript: void(0);" onclick="demoDontRemind()">Try demo</a></p>
 	<p><a href="javascript: void(0);" onclick="localStorage.removeItem('prompt.bugme');">refresh</a></p>
 
-	<script>
-		var i=0;
-		(function counter(){
-			$("#counter").html("seconds:" + i++).css("backgroundColor","#eee");
-			setTimeout(counter,1000);
-		})()
-	</script>
+<h2>Dont close dialog - e.preventDefault()</h2>
+<p>There are circumstances like asking user to install a plugin and reload their page, or verifying the value they have provided before closing the dialog. So using preventDefault() lets us persist the dialog.</p>
+<script class="pre">
+function demoPreventDefault(){
+	$('<p>What is 1+1</p>').prompt(function(e){
+		// Force value, unless they cancel
+		if(e.response != 2 && e.response !== false ){
+			e.preventDefault();
+		}
+		$(this).prepend('<p>Guess again</p>');
+
+	});
+}
+</script>
+	<p><a href="javascript: void(0);" onclick="demoPreventDefault()">Try demo</a></p>
+
+
+
 
 <h2>Styling</h2>
 	<p>Demo: <a href="javascript:void(0);" onclick="customSmart()">Try it</a></p>
