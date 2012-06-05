@@ -8,11 +8,13 @@
 
 	var ignorelist = [];
 	try{ignorelist = JSON.parse(localStorage.getItem('prompt.bugme')) || [];}catch(e){}
+	if(!ignorelist instanceof Array){
+		ignorelist = [];
+	}
+
 
 	$.fn.popup = function(message, callback, bugme ){
-		
-		var defaultValue='';
-
+	
 		if(typeof(callback) === 'boolean'){
 			bugme = callback;
 		}
@@ -23,17 +25,9 @@
 		}
 		
 		if(typeof(message) === 'string'){
-
 			// wrap message
-			if(this.length === 0){
-				message = $("<p>"+message+"</p>").get(0);
-			}
-			else {
-				defaultValue = message;
-				message = null;
-			}
+			message = $("<p>"+message+"</p>").get(0);
 		}
-
 		
 		message = message || this;
 		
@@ -45,7 +39,7 @@
 		
 		// in the ignore list?
 		var hash = $(message).text();
-		if(bugme && ignorelist.indexOf(hash)>-1){
+		if(bugme && "indexOf" in ignorelist && ignorelist.indexOf(hash)>-1){
 			callback(bugme);
 			return $();
 		}
@@ -63,7 +57,7 @@
 		$(document).bind('keydown', bind );
 		
 		// build popup
-		var $popup = $('<iframe class="jquery_prompt"></iframe><div class="jquery_prompt plugin"><form>'
+		var $popup = $('<iframe class="jquery_prompt" allowtransparency=true frameborder="0" scrolling="auto" marginheight="0" marginwidth="0"></iframe><div class="jquery_prompt plugin"><form>'
 						+'<footer>'
 						+'<input type="text" name="text" value="" style="display:none;"/>'
 						+'<button type="reset" style="display:none;">Cancel</button>'
@@ -112,10 +106,6 @@
 					$(this).submit();
 				})
 				.find('button[type=submit]')
-				.trigger('focus')
-				.end()
-				.find('input[type=text]')
-				.val(defaultValue)
 				.trigger('focus')
 				.end()
 				.end();
