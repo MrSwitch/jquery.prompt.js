@@ -36,6 +36,7 @@
 }
 iframe.jquery_prompt{
 	display:table;
+	filter: alpha(Opacity=20);
 }
 .jquery_prompt ~ *:not(.jquery_prompt) {
 	-webkit-filter: blur(2px);
