@@ -29,8 +29,11 @@
 &lt;link rel=&quot;stylesheet&quot; href=&quot;./jquery.prompt.css&quot;/&gt;
 </pre>
 	<p>And then create popups</p>
-	<pre>$('&lt;p&gt;Nice isn't it!&lt;/p&gt;').confirm()</pre>
-	<p>Demo: <a href="javascript:void(0);" onclick="$('<p>Nice isn\'t it!</p>').confirm()">$.fn.confirm()</a></p>
+<script class="pre" data-tryit="nice">
+function nice(){
+	$("<p>Nice isn\'t it!</p>").confirm();
+}
+</script>
 	<h2>Methods</h2>
 	<p>This adds the following methods to jQuery</p>
 	<dl>
@@ -47,7 +50,6 @@ function pickcolor(){
 }
 </script>
 	<p>The scope of the callback is within the DOM form (which belongs to the prompt window). This is so we can access any customised extras which were added to the popup</p>
-	<p><a href="javascript: void(0);" onclick="selectColor()">Try demo</a></p>
 
 <script class="pre" data-tryit="selectColor">
 function selectColor(){
@@ -59,6 +61,7 @@ function selectColor(){
 
 <h2>Dont remind me again</h2>
 <p>Passing in a boolean value as the second parameter indicates the default value, and an additional "Do not bug me again message". $.fn.prompt(function, true). </p>
+
 <script class="pre" data-tryit="demoDontRemind">
 function demoDontRemind(){
 
@@ -77,6 +80,7 @@ function demoDontRemind(){
 		}
 	},true);
 }
+
 </script>
 
 	<p><a href="javascript: void(0);" onclick="localStorage.removeItem('prompt.bugme');">refresh</a></p>
@@ -97,7 +101,7 @@ function demoPreventDefault(){
 
 
 <h2>Styling</h2>
-	<p>Demo</p>
+	<p>Get creative with CSS and you can make some pretty cool looking prompts</p>
 
 <script class="pre" data-tryit="customSmart">
 function customSmart(){
