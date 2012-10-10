@@ -5,11 +5,6 @@
 	<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
 	<script src="jquery.prompt.js"></script>
 	<link rel="stylesheet" href="jquery.prompt.css"/>
-	<style>
-		body{font-family:verdana;font-size:1.1em;}
-		pre, .pre{background-color:#eee;border:1px solid #ddd;border-left-width:10px;padding:20px;}
-	</style>
-
 	<script>
 		var i=0;
 		(function counter(){
@@ -19,8 +14,8 @@
 	</script>
 
 	<!-- page style -->
-	<link rel="stylesheet" href="../_packages/document.css"/>
-	<script src="../_packages/document.js"></script>
+	<link rel="stylesheet" href="/_packages/document.css"/>
+	<script src="/_packages/document.js"></script>
 </head>
 <body>
 	<h1>jquery.prompt.js - non-blocking popup!</h1>
@@ -45,13 +40,16 @@
 	</dl>
 	<h2>Function Callback</h2>
 	<p>The first parameter returns either, bool ('ok' = true, 'cancel' = false) or if a text value is given by the user in the prompt this value is returned.<p>
-	<p><a href="javascript:void(0);" onclick="pickcolor()">Try demo</a></p>
-<script class="pre">function pickcolor(){
+
+<script class="pre" data-tryit='pickcolor'>
+function pickcolor(){
 	$('<p>Pick a color, e.g. red, green, blue</p>').prompt(function(e){document.body.style.backgroundColor = e.response;})	
-}</script>
+}
+</script>
 	<p>The scope of the callback is within the DOM form (which belongs to the prompt window). This is so we can access any customised extras which were added to the popup</p>
 	<p><a href="javascript: void(0);" onclick="selectColor()">Try demo</a></p>
-<script class="pre">
+
+<script class="pre" data-tryit="selectColor">
 function selectColor(){
 	$('<p>Pick a color <select><option>red</option><option>green</option><option>blue</option></select></p>').confirm(function(e){
 		if(e.response){document.body.style.backgroundColor = $('select',this).val();}
@@ -61,17 +59,18 @@ function selectColor(){
 
 <h2>Dont remind me again</h2>
 <p>Passing in a boolean value as the second parameter indicates the default value, and an additional "Do not bug me again message". $.fn.prompt(function, true). </p>
-<script class="pre">
-function doSomething(){
-	var a = [], 
-		i=3; 
-	while(i--){
-		a.push(parseInt(Math.random()*125)+125);
-	}
-	document.body.style.backgroundColor='rgb('+a.join(',')+')'	
-}
-
+<script class="pre" data-tryit="demoDontRemind">
 function demoDontRemind(){
+
+	var doSomething = function(){
+		var a = [], 
+			i=3; 
+		while(i--){
+			a.push(parseInt(Math.random()*125)+125);
+		}
+		document.body.style.backgroundColor='rgb('+a.join(',')+')'	
+	}
+
 	$('<p>Really want to change...  i\'m going to bug you until you tick the box</p>').confirm(function(e){
 		if(e.response){ 
 			doSomething(); 
@@ -79,12 +78,12 @@ function demoDontRemind(){
 	},true);
 }
 </script>
-	<p><a href="javascript: void(0);" onclick="demoDontRemind()">Try demo</a></p>
+
 	<p><a href="javascript: void(0);" onclick="localStorage.removeItem('prompt.bugme');">refresh</a></p>
 
 <h2>Dont close dialog - e.preventDefault()</h2>
 <p>There are circumstances like asking user to install a plugin and reload their page, or verifying the value they have provided before closing the dialog. So using preventDefault() lets us persist the dialog.</p>
-<script class="pre">
+<script class="pre" data-tryit='demoPreventDefault'>
 function demoPreventDefault(){
 	$('<p>What is 1+1</p>').prompt(function(e){
 		// Force value, unless they cancel
@@ -92,21 +91,21 @@ function demoPreventDefault(){
 			e.preventDefault();
 		}
 		$(this).prepend('<p>Guess again</p>');
-
 	});
 }
 </script>
-	<p><a href="javascript: void(0);" onclick="demoPreventDefault()">Try demo</a></p>
-
-
 
 
 <h2>Styling</h2>
-	<p>Demo: <a href="javascript:void(0);" onclick="customSmart()">Try it</a></p>
-	<script class="pre" title="Script">function customSmart(){
+	<p>Demo</p>
+
+<script class="pre" data-tryit="customSmart">
+function customSmart(){
 	$('<h2 class="gradient">Style Demo</h2><p>With custom styles we can customise individual or a group of dialog boxes. e.g. add a styled h1 tag. Set a max-width on the content tags to stop it from stretching &amp; colour the button below red in order to bring attention to it, even change the button text... </p>').alert().addClass('smart')
-}</script>
-	<style class="pre" title="Style">
+}
+</script>
+
+<style class="pre">
 .smart form{
 	background-color:#444;
 }
@@ -148,6 +147,6 @@ function demoPreventDefault(){
 	.smart footer button:focus{
 		outline: none;
 	}
-	</style>
+</style>
 </body>
 </html>
