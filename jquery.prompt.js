@@ -58,13 +58,13 @@
 		
 		// build popup
 		var $popup = $('<iframe class="jquery_prompt" allowtransparency=true frameborder="0" scrolling="auto" marginheight="0" marginwidth="0"></iframe><div class="jquery_prompt plugin"><form>'
-						+'<footer>'
+						+'<div class="footer">'
 						+'<input type="text" name="text" value="" style="display:none;"/>'
 						+'<button type="reset" style="display:none;">Cancel</button>'
 						+'<button type="submit" name="submit" value="1">Ok</button>'
 						+'<br/><input name="bugme" id="bugme" type="checkbox" value="1" checked="checked" style="display:none;">'
 						+'<label for="bugme" style="display:none;">keep asking me</label>'
-						+'</footer>'
+						+'</div>'
 					+'</form></div>')
 				.prependTo("body")
 				.find('form')

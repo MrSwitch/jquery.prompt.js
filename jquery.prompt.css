@@ -64,14 +64,14 @@ iframe.jquery_prompt{
 	}
 	.plugin form > *,
 	.plugin form h1,
-	.plugin form footer{
+	.plugin form .footer{
 		padding-left:20px;
 		padding-right:20px;
 	}
 	.plugin form > :first-child{
 		padding-top:20px;
 	}
-	.plugin form footer{
+	.plugin form .footer{
 		padding-bottom:20px;
 		position: relative;
 	}
